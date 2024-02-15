@@ -19,8 +19,24 @@ Make sure the following components are installed on your system:
 4. Dump the db now by running this command in a new console: `docker-compose exec app python app/db_dump.py`
 5. See this db data by opening this directory: `docker exec -it <container_name_or_id> /bin/bash`, `cd usr/src/django-scraper/dumps`, `cat filename.json`
  or use DockerDesktop
-   
 
+### Managing Daemons
+To control daemons within the Snort container, open another bash window:
+
+docker exec -it snort bash
+
+Use the following commands to manage processes::
+
+`supervisorctl status
+supervisorctl status process_name
+supervisorctl restart process_name
+supervisorctl stop process_name
+supervisorctl start process_name
+Notice, that we have 4 processes:`
+
+server - Django
+cron - runs cron with script for auto clearing table with events in database weekly (12:00 every day)
+   
 
 ## Usage
 

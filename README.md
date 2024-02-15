@@ -28,7 +28,7 @@ To control daemons within the Snort container, open another bash window:
 Use the following commands to manage processes::
 
 1. `supervisorctl status`
-2. `supervisorctl status process_name`3
+2. `supervisorctl status process_name`
 3. `supervisorctl restart process_name`
 4. `supervisorctl stop process_name`
 5. `supervisorctl start process_name`

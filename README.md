@@ -16,9 +16,10 @@ Make sure the following components are installed on your system:
 1. Clone the repository: `https://github.com/yurakomarnitskyi/django-scraper.git`
 2. Navigate to the project directory: `cd django-scraper`
 3. Start Docker Compose: `docker-compose up`
-4. Dump the db now by running this command in a new console: `docker-compose exec app python app/db_dump.py`
-5. See this db data by opening this directory: `docker exec -it <container_name_or_id> /bin/bash`, `cd usr/src/django-scraper/dumps`, `cat filename.json`
- or use DockerDesktop
+4. Dump the db now by running this command in a new console: `docker-compose exec scrap python app/db_dump.py`
+5. See this db data by opening this directory:
+6. `docker exec -it <container_name_or_id> /bin/bash`,
+7. `cd usr/src/django-scraper/dumps`, `cat filename.json  or use DockerDesktop
    
 
 

@@ -1,1 +1,1 @@
-43 11 * * * /usr/local/bin/python /usr/src/django_scraper/app/scrap.py >> /tmp/postgres_dump.log 2>&1
+43 11 * * * python /usr/src/django_scraper/app/scrap.py >> /tmp/postgres_dump.log 2>&1

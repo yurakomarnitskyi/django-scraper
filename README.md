@@ -35,7 +35,8 @@ Use the following commands to manage processes::
 
 ### Notice, that we have 1 processes:`
 
-- cron - runs cron with script for auto clearing table with events in database weekly (12:00 every day)
+- cron - runs cron with script for auto satrt scarp data (12:00 every day)
+- And dump db every-day (13:00)
    
 
 ## Usage

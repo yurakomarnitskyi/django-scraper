@@ -1,15 +1,19 @@
 FROM python:latest
-RUN apt-get update && apt-get install -y supervisor && apt-get install cron -y
 
-COPY . /usr/src/django_scraper
+WORKDIR /root/django_scraper/
 
-WORKDIR /usr/src/django_scraper
 
-ADD crontab /etc/cron.d/my-cron-file
+RUN apt-get update && apt-get install -y cron supervisor
 
-RUN crontab /etc/cron.d/my-cron-file
-
-COPY requirements.txt ./
+COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
+COPY ./app ./app
 
+COPY configs/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+COPY configs/cronfile /etc/cron.d/cronfile
+
+RUN crontab /etc/cron.d/cronfile
+
+ENTRYPOINT /usr/bin/supervisord

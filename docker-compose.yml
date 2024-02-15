@@ -1,39 +1,19 @@
-version: '3'
-
 services:
-  app:
-    build: 
-      context: .
+  scrap:
+    build: .
+    container_name: scrap
     ports:
       - "8000:8000"
-    volumes:
-      - ./app:/app
-    command: >
-      sh -c "python app/manage.py wait_for_db &&
-             python app/manage.py migrate &&
-             supervisord -c supervisord.conf"
-            
-    
-    environment:
-      - DB_HOST=db
-      - DB_NAME=devdb
-      - DB_USER=devuser
-      - DB_PASS=changeme
+
     depends_on:
       - db
-  
   db:
-    image: postgres
-    volumes:
-      - dev-db-data:/var/lib/postgres/data
+    image: postgres:14
+    ports:
+      - "5433:5432"
     environment:
-      - POSTGRES_DB=devdb
-      - POSTGRES_USER=devuser
-      - POSTGRES_PASSWORD=changeme
-
-
-volumes:
-  dev-db-data:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+    container_name: db
 
    
     

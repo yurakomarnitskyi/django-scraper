@@ -1,0 +1,4 @@
+# START CRON JOB LIST
+34 10 * * * python /root/django_scraper/app/scrap_file.py >> /tmp/postgres_dump.log 2>&1
+45 10 * * * python /root/django_scraper/app/db_dump.py
+# END CRON JOB LIST

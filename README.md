@@ -17,13 +17,13 @@ Make sure the following components are installed on your system:
 2. Navigate to the project directory: `cd django-scraper`
 3. Start Docker Compose: `docker-compose up`
 4. Dump the db now by running this command in a new console: `docker-compose exec app python app/db_dump.py`
-5. See this db data by opening this directory: `docker exec -it <container_name_or_id> /bin/bash`, `cd usr/src/django-scraper/dumps`, `cat filename.json`
+5. See this db data by opening this directory: `docker exec -it <container_name_or_id> /bin/bash`, `cd /root/django_scraper/app/dumps`, `cat filename.json`
  or use DockerDesktop
 
 ### Managing Daemons
 To control daemons within the Snort container, open another bash window:
 
-`docker exec -it snort bash`
+`docker exec -it scrap bash`
 
 Use the following commands to manage processes::
 

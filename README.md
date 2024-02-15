@@ -23,19 +23,19 @@ Make sure the following components are installed on your system:
 ### Managing Daemons
 To control daemons within the Snort container, open another bash window:
 
-docker exec -it snort bash
+`docker exec -it snort bash`
 
 Use the following commands to manage processes::
 
-`supervisorctl status
-supervisorctl status process_name
-supervisorctl restart process_name
-supervisorctl stop process_name
-supervisorctl start process_name
-Notice, that we have 4 processes:`
+1. `supervisorctl status`
+2. `supervisorctl status process_name`3
+3. `supervisorctl restart process_name`
+4. `supervisorctl stop process_name`
+5. `supervisorctl start process_name`
 
-server - Django
-cron - runs cron with script for auto clearing table with events in database weekly (12:00 every day)
+### Notice, that we have 1 processes:`
+
+- cron - runs cron with script for auto clearing table with events in database weekly (12:00 every day)
    
 
 ## Usage

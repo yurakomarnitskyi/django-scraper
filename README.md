@@ -25,7 +25,7 @@ Make sure the following components are installed on your system:
 3. `cat filename.json` or use DockerDesktop
    
 ### Managing Daemons
-To control daemons within the Snort container, open another bash window:
+To control daemons within the scrap container, open another bash window:
 
 `docker exec -it scrap bash`
 

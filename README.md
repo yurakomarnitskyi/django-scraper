@@ -19,8 +19,8 @@ Make sure the following components are installed on your system:
 
 
 ### Notice, that we have 1 processes:`
-- Scarp data (12:00 every day)
-- And dump db every-day (13:00)
+- Scarp data every day(12:00)
+- Dump db every-day(13:00)
    
 
 ## Usage

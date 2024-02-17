@@ -1,3 +1,5 @@
+from __future__ import absolute_import, unicode_literals
+from celery import shared_task
 import os
 import django
 import requests
@@ -6,14 +8,14 @@ import datetime
 import re
 import logging
 
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings")
 django.setup()
 
 logger = logging.getLogger('scraper')
-
 from scraper.models import Car  
 
+
+@shared_task
 def scrape_and_save_data(start_url):
     """The main function that the entire script performs."""
     logger.info(f"Scraping started at {datetime.datetime.now()}")

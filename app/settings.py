@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'scraper',
+    'db_app',
+    'django_celery_beat', 
 ]
 
 MIDDLEWARE = [
@@ -75,16 +78,6 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'avto',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'postgres',
-#         "PORT": '5432'
-#     }
-# }
 
 DATABASES = {
     "default": {
@@ -138,6 +131,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+
+CELERY_BEAT_SCHEDULE = {
+    'first-task':{
+        'task': 'scraper.tasks.scrape_and_save_data',
+        'schedule': crontab(hour=12, minute=0),
+        'args': ('https://auto.ria.com/uk/car/used/',), 
+    },
+    'second-task':{
+        'task': 'db_app.tasks.dump_database',
+        'schedule': crontab(hour=13, minute=0),
+    }
+}
 
 LOGGING = {
     'version': 1,

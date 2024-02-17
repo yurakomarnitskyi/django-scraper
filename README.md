@@ -16,33 +16,14 @@ Make sure the following components are installed on your system:
 1. Clone the repository: `https://github.com/yurakomarnitskyi/django-scraper.git`
 2. Navigate to the project directory: `cd django-scraper`
 3. Start Docker Compose: `docker-compose up`
-4. Scrap manual `docker-compose exec app python app/scrap_file.py`
-5. Dump the db now by running this command in a new console: `docker-compose exec app python app/db_dump.py`
-   
-### See this db data by opening this directory:
-1. `docker exec -it <container_name_or_id> /bin/bash`, 
-2. `cd /root/django_scraper/app/dumps`,
-3. `cat filename.json` or use DockerDesktop
-   
-### Managing Daemons
-To control daemons within the scrap container, open another bash window:
 
-`docker exec -it scrap bash`
-
-Use the following commands to manage processes::
-
-1. `supervisorctl status`
-2. `supervisorctl status process_name`
-3. `supervisorctl restart process_name`
-4. `supervisorctl stop process_name`
-5. `supervisorctl start process_name`
 
 ### Notice, that we have 1 processes:`
-- cron - runs cron with script for auto satrt scarp data (12:00 every day)
-- And dump db every-day (13:00)
+- Scarp data (12:00 every day)
+- And dump db every-day (17:00)
    
 
 ## Usage
-The project utilizes Django, PostgreSQL, BeautifulSoup for scraping, and Docker for containerization.
+The project utilizes Django, PostgreSQL, BeautifulSoup, Celery, Docker.
 
 

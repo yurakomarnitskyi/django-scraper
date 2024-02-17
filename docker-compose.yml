@@ -1,19 +1,61 @@
-services:
-  scrap:
-    build: .
-    container_name: scrap
-    ports:
-      - "8000:8000"
+version: '3.8'
 
-    depends_on:
-      - db
+services:
   db:
     image: postgres:14
     ports:
       - "5433:5432"
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
     container_name: db
+    
+  django:
+    build: .
+    container_name: django
+    command: >
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate"
+            
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+      - DJANGO_AllOWED_HOSTS=localhost 127.0.0.1
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+      
+  celery:
+    build: .
+    command: celery -A app worker -l INFO
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - django
+      - redis
+  
+  celery-beat:
+    build: .
+    command: celery -A app beat -l INFO
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - django
+      - redis
+      - celery
+
+  redis:
+    image: "redis:alpine"
+
+volumes:
+  pgdata:
+
 
    
     

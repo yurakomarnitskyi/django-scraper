@@ -1,3 +1,5 @@
+from __future__ import absolute_import, unicode_literals
+from celery import shared_task
 import os
 from datetime import datetime
 from django.core.management import call_command
@@ -11,6 +13,7 @@ logger = logging.getLogger('scraper')
 
 DB_NAME = os.getenv("DB_NAME")
 
+@shared_task
 def dump_database():
     dump_dir = "dumps/"
     os.makedirs(dump_dir, exist_ok=True)
